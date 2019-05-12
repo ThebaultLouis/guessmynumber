@@ -158,8 +158,9 @@ function displayImages() {
 // Envoyer au serveur
 function submit(image) {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "http://localhost:5000/100/100", false);
-        xhttp.send(image);
+        xhttp.open("POST", "http://localhost:5000/100/100", false);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send(JSON.stringify({image: image}));
         return Number(JSON.parse(xhttp.responseText)['number'])
         // console.log(xhttp.responseText)
         // return 1

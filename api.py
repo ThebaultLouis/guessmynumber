@@ -1,6 +1,8 @@
 import flask
+import json
 from flask import render_template
 import random as rd
+from flask import request
 
 app = flask.Flask(__name__)
 
@@ -8,11 +10,18 @@ app = flask.Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route("/<path:fullurl>", methods=['GET'])
+@app.route("/<path:fullurl>", methods=['GET', 'POST'])
 def main(fullurl):
-    # height, width = [int(e) for e in fullurl.split('/')]
+    height, width = [int(e) for e in fullurl.split('/')]
+    jsonResponse = json.loads(request.data.decode('utf-8'))
 
-    response = flask.jsonify({'number': rd.randint(0, 9)})
+    # print(request.data.get('image', ''))
+    response = flask.jsonify({
+        'number': rd.randint(0, 9),
+        'height': height,
+        'width': width,
+        'image': jsonResponse['image']
+        })
     return response
 
 
