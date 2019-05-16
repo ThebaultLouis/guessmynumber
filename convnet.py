@@ -46,3 +46,7 @@ class ConvNet:
         y_train = tf.keras.utils.to_categorical(y_train, 10)
         self.model.fit(x_train,y_train,epochs=epochs)
                            
+    def prediction(self,image):
+        print(image)
+        image = image.reshape(image.shape[0], image.shape[1],1)
+        return self.model.predict(image)
