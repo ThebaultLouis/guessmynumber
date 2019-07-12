@@ -4,7 +4,7 @@ from flask import render_template
 import random as rd
 from flask import request
 import numpy as np
-#from convnet import ConvNet
+from convnet import ConvNet
 import base64
 import cv2
 
@@ -25,11 +25,14 @@ def main(fullurl):
     f = open("temp.png","w")
     f.write(png_recovered)
     f.close()
-    tab = cv2.imread("temp.png")
+    tab = cv2.imread("temp.png",0)
+    new = cv2.resize (tab, (120,120))
+    cv2.imwrite("new.png", new)
+    reseau = ConvNet(480,480)
     
     response = flask.jsonify({
-        # 'number': reseau.prediction(datarray),
-        'number': 2,
+        'number': reseau.prediction(tab),
+        #'number': 2,
         'height': height,
         'width': width,
         'image': jsonResponse['image']

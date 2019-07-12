@@ -20,7 +20,6 @@ class ConvNet:
         depth = 16
         dropout = 0.4
         self.model = Sequential()
-        self.model.add(Reshape((self.img_rows, self.img_cols,1)))
         self.model.add(Conv2D(depth,3,strides=1,padding='same',activation='relu',input_shape=self.input_shape))
         self.model.add(Dropout(dropout))
 
@@ -47,6 +46,7 @@ class ConvNet:
         self.model.fit(x_train,y_train,epochs=epochs)
                            
     def prediction(self,image):
-        print(image)
-        image = image.reshape(image.shape[0], image.shape[1],1)
-        return self.model.predict(image)
+        print(image.shape)
+        image = image.reshape(1,image.shape[0], image.shape[1],1)
+        res = self.model.predict(image)
+        return np.argmax(res)
