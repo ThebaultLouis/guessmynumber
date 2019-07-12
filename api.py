@@ -6,6 +6,7 @@ from flask import request
 import numpy as np
 #from convnet import ConvNet
 import base64
+import cv2
 
 app = flask.Flask(__name__)
 
@@ -19,11 +20,13 @@ def index():
 def main(fullurl):
     height, width = [int(e) for e in fullurl.split('/')]
     jsonResponse = json.loads(request.data.decode('utf-8'))
-    # datarray = np.fromstring(jsonResponse['image'], np.uint8)
-    # datarray = np.reshape(datarray, (height, width, 1))
-    #reseau = ConvNet()
-
-    # print(request.data.get('image', ''))
+    image = jsonResponse['image']
+    png_recovered = base64.decodestring(image.split(',')[1])
+    f = open("temp.png","w")
+    f.write(png_recovered)
+    f.close()
+    tab = cv2.imread("temp.png")
+    
     response = flask.jsonify({
         # 'number': reseau.prediction(datarray),
         'number': 2,

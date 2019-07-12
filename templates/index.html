@@ -174,7 +174,7 @@
     // Envoyer au serveur
     function submit(image) {
       var xhttp = new XMLHttpRequest();
-      xhttp.open("POST", "http://localhost:5000/100/100", false);
+      xhttp.open("POST", "http://localhost:5000/"+ctx.canvas.width+"/"+ctx.canvas.height, false);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xhttp.send(JSON.stringify({
         image: image
