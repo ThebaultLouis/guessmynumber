@@ -15,6 +15,81 @@
       background-color: #03224c;
     }
 
+    .myButton {
+
+    -moz-box-shadow: 5px 5px 1px 0px #3e7327;
+
+    -webkit-box-shadow: 5px 5px 1px 0px #3e7327;
+
+    box-shadow: 5px 5px 1px 0px #3e7327;
+
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77b55a), color-stop(1, #72b352));
+
+    background:-moz-linear-gradient(top, #77b55a 5%, #72b352 100%);
+
+    background:-webkit-linear-gradient(top, #77b55a 5%, #72b352 100%);
+
+    background:-o-linear-gradient(top, #77b55a 5%, #72b352 100%);
+
+    background:-ms-linear-gradient(top, #77b55a 5%, #72b352 100%);
+
+    background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
+
+    background-color:#77b55a;
+
+    -moz-border-radius:18px;
+
+    -webkit-border-radius:18px;
+
+    border-radius:18px;
+
+    border:1px solid #4b8f29;
+
+    display:inline-block;
+
+    cursor:pointer;
+
+    color:#ffffff;
+
+    font-family:Impact;
+
+    font-size:20px;
+
+    padding:15px 39px;
+
+    text-decoration:none;
+
+    }
+    .myButton:hover {
+
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #72b352), color-stop(1, #77b55a));
+
+    background:-moz-linear-gradient(top, #72b352 5%, #77b55a 100%);
+
+    background:-webkit-linear-gradient(top, #72b352 5%, #77b55a 100%);
+
+    background:-o-linear-gradient(top, #72b352 5%, #77b55a 100%);
+
+    background:-ms-linear-gradient(top, #72b352 5%, #77b55a 100%);
+
+    background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#72b352', endColorstr='#77b55a',GradientType=0);
+
+    background-color:#72b352;
+
+    }
+
+    .myButton:active {
+
+    position:relative;
+
+    top:1px;
+
+    }
+    
     .container {
       margin: 0 auto;
       width: 80%;
@@ -96,7 +171,7 @@
     canvas.addEventListener('mousemove', move, false);
     canvas.addEventListener('touchmove', move, false);
 
-    ctx.lineWidth = 3;
+    ctx.lineWidth =20;
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
     ctx.strokeStyle = '#000000';
@@ -174,7 +249,8 @@
     // Envoyer au serveur
     function submit(image) {
       var xhttp = new XMLHttpRequest();
-      xhttp.open("POST", "http://localhost:5000/"+ctx.canvas.width+"/"+ctx.canvas.height, false);
+     xhttp.open("POST", "http://localhost:5000/guess", false);
+    //xhttp.open("POST", "http://guessmynumber.ml/guess", false);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xhttp.send(JSON.stringify({
         image: image
