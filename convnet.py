@@ -42,15 +42,15 @@ class ConvNet:
         
         x_train = np.array([cv2.resize(pic, (self.img_rows, self.img_cols)) for pic in x_train])
         x_train = x_train.reshape(x_train.shape[0], self.img_rows,self.img_cols,1)
-        x_train = np.array([x_train[k] for k in indexes])
+        #x_train = np.array([x_train[k] for k in indexes])
         y_train = tf.keras.utils.to_categorical(y_train, 10)
-        y_train = np.array([y_train[k] for k in indexes])
+        #y_train = np.array([y_train[k] for k in indexes])
 
         x_test = np.array([cv2.resize(pic, (self.img_rows, self.img_cols)) for pic in x_test])
         x_test = x_test.reshape(x_test.shape[0], self.img_rows,self.img_cols,1)
-        x_test = np.array([x_test[k] for k in ind])
+        #x_test = np.array([x_test[k] for k in ind])
         y_test = tf.keras.utils.to_categorical(y_test, 10)
-        y_test = np.array([y_test[k] for k in ind])
+        #y_test = np.array([y_test[k] for k in ind])
         
         print("training ...\n")
         self.model.fit(x_train,y_train,epochs=epochs,batch_size=128,verbose=1,validation_data=(x_test,y_test))

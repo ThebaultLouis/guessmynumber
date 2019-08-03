@@ -11,7 +11,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.models import model_from_json
 
 app = flask.Flask(__name__)
-
+imsize = 28
 
 @app.route("/")
 def index():
@@ -27,8 +27,8 @@ def main():
     f.write(png_recovered)
     f.close()
     tab = cv2.bitwise_not(cv2.imread("temp.png",0))
-    new = cv2.resize (tab, (120,120))
-    cv2.imwrite("temp.png",new)
+    new = cv2.resize (tab, (imsize,imsize))
+    cv2.imwrite("visu.png",new)
     
     json_file = open('model.json','r')
     loaded_model_json = json_file.read()
@@ -37,7 +37,7 @@ def main():
 
     loaded_model.load_weights("model.h5")
 
-    reseau = ConvNet(120,120)
+    reseau = ConvNet(imsize,imsize)
     reseau.model = loaded_model
     
     response = flask.jsonify({

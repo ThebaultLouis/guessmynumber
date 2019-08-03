@@ -138,7 +138,7 @@
       <canvas id="myCanvas"></canvas>
     </div>
     <div class="form">
-      <button type="button" name="button" id="upload">Guess My Number</button>
+      <button type="button" name="button" class="myButton" id="upload">Guess My Number</button>
     </div>
     <div id="display">
     </div>
@@ -249,8 +249,8 @@
     // Envoyer au serveur
     function submit(image) {
       var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "http://localhost:5000/guess", false);
-    //xhttp.open("POST", "http://guessmynumber.ml/guess", false);
+     //xhttp.open("POST", "http://localhost:5000/guess", false);
+    xhttp.open("POST", "http://guessmynumber.ml/guess", false);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xhttp.send(JSON.stringify({
         image: image
@@ -268,8 +268,10 @@
       //if you dont replace you will get a DOM 18 exception.
 
       // Soumettre l'image à l'IA
-      var number = submit(JSON.stringify(image))
+      //var number = submit(JSON.stringify(image))
+      var number = submit(image)
 
+    
       // Enregistrer dans l'historique des résultats
       var images = JSON.parse(localStorage.getItem("image"))
       images.unshift({
